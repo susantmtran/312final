@@ -1,5 +1,3 @@
-# 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
-
 library(tidyverse)
 library(readxl)
 library(janitor)
@@ -10,7 +8,6 @@ library(tidycensus)
 zip_tract <- read_excel("ZIP_TRACT_122021.xlsx")
 
 # census api data
-# 7495b6f59b36203d746330a20f854cc8bfbf57b8
 
 # figuring out how to get the data with northwestern first
 
