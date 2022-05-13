@@ -52,3 +52,7 @@ plot(uni_data$h_index ~ I(log(uni_data$end_endow)),
      ylab = "theil's information index")
 
 abline(lm_log)
+
+### LAB 6
+
+# problem 1 -- multivariate regression
