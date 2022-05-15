@@ -56,3 +56,14 @@ abline(lm_log)
 ### LAB 6
 
 # problem 1 -- multivariate regression
+
+uni_data$ranking <- as.numeric(uni_data$ranking)
+
+model <- lm(h_index ~ I(log(end_endow)) + factor(ranking) + year, uni_data)
+summary(model)
+
+model2 <- lm(h_index ~ I(log(end_endow)) + factor(ranking):year, uni_data)
+summary(model2)
+
+library(stargazer)
+stargazer(lm_log, model, type="text", out="reg_table.html")
