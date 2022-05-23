@@ -1,6 +1,7 @@
 library(tidyverse)
 library(readxl)
 library(janitor)
+library(scales)
 
 uni_data <- read_excel("uni_data.xlsx") %>% clean_names()
 
@@ -71,4 +72,7 @@ stargazer(lm_log, model, type="text", out="reg_table.html")
 ### LAB 7
 uni_data$type <- as.factor(uni_data$type)
 uni_data$county <- as.factor(uni_data$county)
-uni_data$year <- format(uni_data$year, format = "%Y")
+uni_data$admit_pct <- uni_data$admit_pct/100
+
+final_model <- lm(h_index ~ I(log(end_endow)) + ranking:admit_pct + year, uni_data)
+summary(final_model)
