@@ -67,3 +67,8 @@ summary(model2)
 
 library(stargazer)
 stargazer(lm_log, model, type="text", out="reg_table.html")
+
+### LAB 7
+uni_data$type <- as.factor(uni_data$type)
+uni_data$county <- as.factor(uni_data$county)
+uni_data$year <- format(uni_data$year, format = "%Y")
