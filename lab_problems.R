@@ -73,6 +73,9 @@ stargazer(lm_log, model, type="text", out="reg_table.html")
 uni_data$type <- as.factor(uni_data$type)
 uni_data$county <- as.factor(uni_data$county)
 uni_data$admit_pct <- uni_data$admit_pct/100
+uni_data$year <- as.character(uni_data$year)
+uni_data$year <- as.Date(uni_data$year, "%Y")
 
 final_model <- lm(h_index ~ I(log(end_endow)) + ranking:admit_pct + year, uni_data)
-summary(final_model)
+final_model2 <- lm(h_index ~ I(log(end_endow)) + ranking + admit_pct + year, uni_data)
+stargazer(lm_log, model, final_model, final_model2, type = "text", out = "reg_table.html")
