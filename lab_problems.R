@@ -70,6 +70,9 @@ library(stargazer)
 stargazer(lm_log, model, type="text", out="reg_table.html")
 
 ### LAB 7
+
+# problem 1 -- regression
+
 uni_data$type <- as.factor(uni_data$type)
 uni_data$county <- as.factor(uni_data$county)
 uni_data$admit_pct <- uni_data$admit_pct/100
@@ -78,4 +81,30 @@ uni_data$year <- as.Date(uni_data$year, "%Y")
 
 final_model <- lm(h_index ~ I(log(end_endow)) + ranking:admit_pct + year, uni_data)
 final_model2 <- lm(h_index ~ I(log(end_endow)) + ranking + admit_pct + year, uni_data)
+
 stargazer(lm_log, model, final_model, final_model2, type = "text", out = "reg_table.html")
+
+summary(lm_log)
+summary(model)
+summary(final_model)
+summary(final_model2)
+
+# problem 2 -- largest change
+
+quantile(uni_data$end_endow, na.rm=TRUE)
+quantile(log(uni_data$end_endow), na.rm=TRUE)
+x_quantiles <- quantile(log(uni_data$end_endow), na.rm=TRUE)
+
+percentile_25 <- x_quantiles[[2]]
+percentile_75 <- x_quantiles[[4]]
+
+coefficients <- coef(final_model2)
+coefficient_x <- coefficients[[2]]
+change_x <- percentile_75 - percentile_25
+change_y <- change_x * coefficient_x
+change_y
+
+range_y <- range(uni_data$h_index, na.rm = TRUE)[2] -
+  range(uni_data$h_index, na.rm = TRUE)[1]
+range(uni_data$h_index, na.rm = TRUE)
+change_y/range_y
